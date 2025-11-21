@@ -10,7 +10,7 @@ int main() {
     list->addFirst(10);
     list->addLast(30);
     list->print();
-    cout << "Element at position 2: " << list->get(2) << endl;
+    cout << list->get(2) << endl;
     // list->removeLast();
     // list->print();
     delete list;

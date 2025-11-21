@@ -1,4 +1,4 @@
-#include <iostream>
+#include<iostream>
 #include "list.h"
 #include "node.h"
 using namespace std;
@@ -21,11 +21,11 @@ class DoublyLinkedList : public List {
     }
 
     int removeNode(node* n) {
+        int elem = n->elem;
         node* pred = n->prev;
         node* succ = n->next;
         pred->next = succ;
         succ->prev = pred;
-        int elem = n->elem;
         free(n);
         _size--;
         return elem;
@@ -51,7 +51,7 @@ class DoublyLinkedList : public List {
 
         void addFirst(int num) {
             addBetween(num, header, header->next);
-        }
+        } 
 
         void addLast(int num) {
             addBetween(num, trailer->prev, trailer);
@@ -60,57 +60,59 @@ class DoublyLinkedList : public List {
         int removeFirst() {
             if(isEmpty()) return -1;
             return removeNode(header->next);
-        }
+        } 
 
         int removeLast() {
             if(isEmpty()) return -1;
             return removeNode(trailer->prev);
-        }
+        } 
 
         int get(int pos) {
-            if(pos < 1 || pos > size()) return -1;
-            node* current;
+            node* curr;
             if(pos <= size() / 2) {
-                current = header->next;
-                for(int i = 1; i < pos; i++) {
-                    current = current->next;
+                curr = header->next;
+                for(int i=1; i<pos; i++) {
+                    curr = curr->next;
                 }
             } else {
-                current = trailer->prev;
-                for(int i = _size; i > pos; i--) {
-                    current = current->prev;
+                curr = trailer->prev;
+                for(int i=size(); i>pos; i--) {
+                    curr = curr->prev;
                 }
             }
-            return current->elem;
-        }
+            return curr->elem;
+        } 
 
         int size() {
             return _size;
-        }
+        } 
 
         bool isEmpty() {
             return size() == 0;
-        }
+        } 
 
         void print() {
             if(isEmpty()) {
                 cout << "Empty" << endl;
                 return;
             }
+
             cout << "FROM HEAD: ";
-            node* current = header->next;
-            while(current != trailer) {
-                cout << current->elem;
-                if(current != trailer->prev) cout << " -> ";
-                current = current->next;
+            node* curr = header->next;
+            while(curr != trailer) {
+                cout << curr->elem;
+                if(curr != trailer->prev) cout << " <--> ";
+                curr = curr->next;
             }
+
             cout << "\nFROM TAIL: ";
-            current = trailer->prev;
-            while(current != header) {
-                cout << current->elem;
-                if(current != header->next) cout << " -> ";
-                current = current->prev;
+            curr = trailer->prev;
+            while(curr != header) {
+                cout << curr->elem;
+                if(curr != header->next) cout << " <--> ";
+                curr = curr->prev;
             }
             cout << endl;
-        }
+        } 
+
 };

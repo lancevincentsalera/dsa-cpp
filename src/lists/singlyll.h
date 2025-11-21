@@ -7,7 +7,7 @@ class SinglyLinkedList : public List {
     using node = lists::sll::node;
     node* head;
     node* tail;
-    int _size; // index
+    int _size;
 
     public:
         SinglyLinkedList() {
@@ -51,51 +51,54 @@ class SinglyLinkedList : public List {
 
         void addFirst(int num) {
             node* new_node = (node*) calloc(1, sizeof(node));
-            if(!new_node) return;
+
+            if(!new_node) return; // new_node == null, memory allocation failed
             new_node->elem = num;
             new_node->next = head;
-            if(!tail) tail = new_node;
             head = new_node;
+            if(!tail) {
+                tail = new_node;
+            }
             _size++;
         }
 
         int removeFirst() {
             if(!head) return -1;
             node* temp = head;
-            int element = head->elem;
+            int elem = head->elem;
             head = head->next;
             free(temp);
             _size--;
-            return element;
+            return elem;
         }
 
         int removeLast() {
             if(!tail) return -1;
-            int element = tail->elem;
-            node* current = head;
-            node* prev = nullptr;
-            while(current != tail) {
-                prev = current;
-                current = current->next;
+            node *curr = head, *prev = nullptr;
+            while(curr != tail) {
+                prev = curr;
+                curr = curr->next;
             }
+
             if(prev) {
-                prev->next = nullptr;
                 tail = prev;
+                prev->next = nullptr;
             } else {
                 head = tail = nullptr;
             }
-            free(current);
+            int elem = curr->elem;
+            free(curr);
             _size--;
-            return element;
+            return elem;
         }
 
         int get(int pos) {
             if(pos < 1 || pos > size()) return -1;
-            node* current = head;
-            for(int i = 1; i < pos; i++) {
-                current = current->next;
+            node* curr = head;
+            for(int i=1; i<pos; i++) {
+                curr = curr->next;
             }
-            return current->elem;
+            return curr->elem;
         }
 
         int size() {
