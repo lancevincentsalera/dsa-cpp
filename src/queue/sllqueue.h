@@ -1,5 +1,5 @@
-// Define the SLLStack class
-// and extend from the Stack class
+// Define the SLLQueue class
+// and extend from the Queue class
 #include "queue.h"
 #include "../lists/singlyll.h"
 

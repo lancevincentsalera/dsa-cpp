@@ -14,8 +14,8 @@ class SLLStack : public Stack {
             delete list;
         }
 
-        void push(int value) {
-            list->addFirst(value);
+        void push(int num) {
+            list->addFirst(num);
         }
 
         int pop() {

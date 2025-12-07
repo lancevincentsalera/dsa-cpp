@@ -52,13 +52,11 @@ class SinglyLinkedList : public List {
         void addFirst(int num) {
             node* new_node = (node*) calloc(1, sizeof(node));
 
-            if(!new_node) return; // new_node == null, memory allocation failed
+            if(!new_node) return;
             new_node->elem = num;
             new_node->next = head;
             head = new_node;
-            if(!tail) {
-                tail = new_node;
-            }
+            if(!tail) tail = new_node;
             _size++;
         }
 
@@ -67,6 +65,7 @@ class SinglyLinkedList : public List {
             node* temp = head;
             int elem = head->elem;
             head = head->next;
+            
             free(temp);
             _size--;
             return elem;
@@ -74,19 +73,19 @@ class SinglyLinkedList : public List {
 
         int removeLast() {
             if(!tail) return -1;
-            node *curr = head, *prev = nullptr;
+            int elem = tail->elem;
+            node* curr = head;
+            node* prev = nullptr;
             while(curr != tail) {
                 prev = curr;
                 curr = curr->next;
             }
-
             if(prev) {
                 tail = prev;
                 prev->next = nullptr;
             } else {
                 head = tail = nullptr;
             }
-            int elem = curr->elem;
             free(curr);
             _size--;
             return elem;

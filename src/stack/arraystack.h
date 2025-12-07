@@ -14,8 +14,8 @@ class ArrayStack : public Stack {
             delete list;
         }
 
-        void push(int value) {
-            list->addLast(value);
+        void push(int num) {
+            list->addLast(num);
         }
 
         int pop() {
