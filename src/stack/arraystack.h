@@ -1,13 +1,21 @@
-#include "lists/arraylist.h"
-class Stack {
+// Define the ArrayStack class
+// and extend from the Stack class
+#include "stack.h"
+#include "../lists/arraylist.h"
+
+class ArrayStack : public Stack {
     List* list;
     public:
-        Stack() {
+        ArrayStack() {
             list = new ArrayList();
         }
 
-        void push(int num) {
-            list->addLast(num);
+        ~ArrayStack() {
+            delete list;
+        }
+
+        void push(int value) {
+            list->addLast(value);
         }
 
         int pop() {
